@@ -6,32 +6,101 @@ package model;
 // CTRL + / - komentowanie/odkomentowanie
 
 import java.time.LocalDateTime;
+// 1. Wszystkie pola są prywatne
+// 2. Publiczne gettery i settery - metody dostępowe
 
 // Klasa user - to klasa modelu-> klasa determinująca strukturę danych
 public class User extends Object{       // Każda klasa dziedziczy klasy nadrzędnej (zgodnie ze specyfikatorami dostępu)
     // pola klasowe -> pola o zasięgu widoczności w obrębie całej klasy
-    int userId;                                   //domyślnie 0
-    public String name;                                  //domyślnie null
-    String lastName;                              //domyślnie null
-    String email;                                 //domyślnie null
-    String password;                              //domyślnie null
-    char gender;                                  //domyślnie ''
-    LocalDateTime registrationDateTime;           //domyślnie null
-    boolean status;                               //domyślnie false
+    private int userId;                                   //domyślnie 0
+    private String name;                                  //domyślnie null
+    private String lastName;                              //domyślnie null
+    private String email;                                 //domyślnie null
+    private String password;                              //domyślnie null
+    private char gender;                                  //domyślnie ''
+    private LocalDateTime registrationDateTime;           //domyślnie null
+    private boolean status;                               //domyślnie false
+
+    // Gettery i Settery
+
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public LocalDateTime getRegistrationDateTime() {
+        return registrationDateTime;
+    }
+
+    public void setRegistrationDateTime(LocalDateTime registrationDateTime) {
+        this.registrationDateTime = registrationDateTime;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     // public - widoczna w całym programie
     // String - typ zwracanej wartości w return
     // toString() - nazwa metody (nie przyjmuje argumentów)
-//    @Override   // Nadpisuje implementacjęmetody toString() z klasy Object
-//    public String toString() {
-//        return "User{" +
-//                "userId=" + userId +
-//                ", name='" + name + '\'' +
-//                ", lastName='" + lastName + '\'' +
-//                ", email='" + email + '\'' +
-//                ", gender=" + gender +
-//                ", registrationDateTime=" + registrationDateTime +
-//                ", status=" + status +
-//                '}';
-//    }
+    @Override   // Nadpisuje implementacjęmetody toString() z klasy Object
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                ", registrationDateTime=" + registrationDateTime +
+                ", status=" + status +
+                '}';
+    }
 }

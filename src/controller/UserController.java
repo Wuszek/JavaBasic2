@@ -3,6 +3,9 @@ package controller;
 import exception.MyException;
 import model.User;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
@@ -83,11 +86,42 @@ public class UserController  implements UserControllerTemplate{
         return null; // gdy nie znaleziono użytkownika zwróć null
     }
 
+    public void saveToFile(){
+        try {
+      // Klasa dedykowana do zapisu do pliku określonego ścieżką bezpośrednią
+      PrintWriter pw =
+          new PrintWriter(
+              new File(
+                  "C:\\Users\\Wiktor\\Documents\\GIT projects\\JavaBasic2\\src\\file\\users.csv"));
+            for (User user : users) {
+                pw.write(user.getUserId()+";"+user.getName()+";"+user.getLastName()+";"+user.getEmail()
+                        +";"+user.getPassword()+";"+user.getGender()+"\n");
+            }
+            pw.close();             // zamknięcie pliku
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void readFromFile(){
+        try {
+      Scanner scanner =
+          new Scanner(
+              new File(
+                  "C:\\Users\\Wiktor\\Documents\\GIT projects\\JavaBasic2\\src\\file\\users.csv"));
+            while (scanner.hasNextLine()){  // jeżeli istnieje kolejna linijka w pliku to przesuń kursor
+                String line [] = scanner.nextLine().split(";");
+                users.add(new User(line[1], line[2], line[3], line[4], line[5].charAt(0)));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
   public static void main(String[] args) {
     UserController uc = new UserController();
-    uc.registerUser(new User("Test", "Test", "test@test.pl", "tEsT",'K'));
-    uc.registerUser(new User("Test2", "Test2", "test2@test.pl", "tEsT2",'M'));
-
+//    uc.registerUser(new User("Test", "Test", "test@test.pl", "tEsT",'K'));
+//    uc.registerUser(new User("Test2", "Test2", "test2@test.pl", "tEsT2",'M'));
+    uc.readFromFile();
     boolean isRun = true;
     while (isRun) {
       // CLI - command line interface
@@ -95,6 +129,7 @@ public class UserController  implements UserControllerTemplate{
       System.out.println(
           "1. Rejestracja \n2. Logowanie \n3. Zmiana hasła \n4. Pokaż wszystkich \n0. Wyjście");
       Scanner scan = new Scanner(System.in);
+
 
       int choice = scan.nextInt();
       scan.nextLine();          // instrukcja konsumująca \n po wprowadzonej liczbie, tak aby nie przesuwać kursora
@@ -138,6 +173,7 @@ public class UserController  implements UserControllerTemplate{
           System.out.print("Wychodzę z programu.");
           isRun = false;
           scan.close();
+          uc.saveToFile();  // zapis aktualnych danych do pliku
           break;
         default:
           System.out.println("Brak takiej opcji.");

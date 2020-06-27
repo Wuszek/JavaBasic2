@@ -17,11 +17,29 @@ public class UserController  implements UserControllerTemplate{
 
     @Override
     public boolean loginUser(String email, String password) {
+        // 1. W pętli szukamy użytkownika z hasłem i emailem jak w argumentach
+        for(User user : users){
+            if(user.getEmail().equals(email) && user.getPassword().equals(password)){
+             //   System.out.println("Zalogowany");
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public void updatePasswordByUserId(int userId, String newPassword) {
+        try{        // zawiera linijki kodu gdzie może wystąpić wyjątek
+        User user = findUserById(userId);
+        user.setPassword(newPassword);
+        } catch (NullPointerException e){      // argumentem w blocku catch jest klasa wyjątku
+            System.out.println("Brak użytkownika o ID " + userId);
+            System.out.println();
+            // e.printStackTrace();         // metoda drukująca na konsoli systemowy komunikat błędu
+        }
+        catch(Exception e){
+            System.out.println("Wystąpił inny błąd");
+        }
 
     }
 
@@ -45,11 +63,31 @@ public class UserController  implements UserControllerTemplate{
 
     }
 
+    // metoda nieznajdująca się w interfejsie
+    public User findUserById(int userId){
+        for (User user  : users){
+            if(user.getUserId() == userId){
+                return user;
+            }
+        }
+        return null; // gdy nie znaleziono użytkownika zwróć null
+    }
+
   public static void main(String[] args) {
     UserController uc = new UserController();
     uc.registerUser(new User("Test", "Test", "test@test.pl", "tEsT",'K'));
-      uc.registerUser(new User("Test2", "Test2", "test2@test.pl", "tEsT2",'M'));
+    uc.registerUser(new User("Test2", "Test2", "test2@test.pl", "tEsT2",'M'));
     System.out.println("Wypisanie wszystkich użytkowników: ");
       uc.printAllUsers();
+      // Wyrażenie 3-argumentowe: warunek ? wartość jeśli true : wartość jeśli false
+      String login = "test@test.pl";
+      String password = "tEsT2";
+    System.out.println(uc.loginUser(login, password) ? "Zalogowany "+login:"Niezalogowany");
+
+    System.out.println(uc.findUserById(1).getPassword());
+    uc.updatePasswordByUserId(3, "TEEEEEEEEEEEEST1");
+    System.out.println(uc.findUserById(1).getPassword());
+
+    System.out.println(uc.loginUser(login, "TEEEEEEEEEEEEST1"));
   }
 }

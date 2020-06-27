@@ -13,8 +13,9 @@ import java.time.LocalDateTime;
 // 4. Publiczna metoda toString()
 
 // Klasa user - to klasa modelu-> klasa determinująca strukturę danych
-public class User
-    extends Object { // Każda klasa dziedziczy klasy nadrzędnej (zgodnie ze specyfikatorami dostępu)
+public class User extends Object { // Każda klasa dziedziczy klasy nadrzędnej (zgodnie ze specyfikatorami dostępu)
+  // pole statyczne -> pole globalne wspólne dla wszystkich obiektów
+  private static int globalId = 0; // pole przechowujące ostatnią wprowadzoną warość id
   // pola klasowe -> pola o zasięgu widoczności w obrębie całej klasy
   private int userId; // domyślnie 0
   private String name; // domyślnie null
@@ -42,7 +43,8 @@ public class User
     this.gender = gender;
     this.registrationDateTime = LocalDateTime.now();    // przypisanie aktualnego czasu rejestracji
       this.status = true;                               // domyślnie status rejestracji jest true
-      this.userId = 1;
+    globalId ++;
+    this.userId = globalId;
     System.out.println("Jestem w konstruktorze z argumentami");
   }
 

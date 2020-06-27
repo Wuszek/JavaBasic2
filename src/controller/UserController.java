@@ -2,21 +2,35 @@ package controller;
 
 import model.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 // UserControler - klasa kontrolera -> klasa obsługująca i dostarczająca logikę biznesową aplikacji
-public class UserController {
+public class UserController  implements UserControllerTemplate{
 
-    // Globalna kolekcja obiektów klasy User
-    List<User> users = new ArrayList<>();           // lista zawsze indeksuje od 0 do size()-1, nie ma dziur w indeksach przy usuwaniu
 
-    // Rejestracja użytkownika
+    @Override
+    public void registerUser(User user) {
+        // 1. Zapisz użytkownika w liście users utworzonej w interfejsie
+        users.add(user);
+        System.out.println("Zarejestrowano nowego użytkownika: " + user.toString());
+    }
 
-    // Logowanie użytkownika
+    @Override
+    public boolean loginUser(String email, String password) {
+        return false;
+    }
 
-    // Zmiana hasła użytkownika
+    @Override
+    public void updatePasswordByUserId(int userId, String newPassword) {
 
-    // Wypisanie wszystkich użytkowników
+    }
 
+    @Override
+    public void printAllUsers() {
+
+    }
+
+  public static void main(String[] args) {
+    UserController uc = new UserController();
+    uc.registerUser(new User("Test", "Test", "test@test.pl", "tEsT",'K'));
+      uc.registerUser(new User("Test2", "Test2", "test2@test.pl", "tEsT2",'M'));
+  }
 }

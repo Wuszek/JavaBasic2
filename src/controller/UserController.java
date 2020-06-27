@@ -110,7 +110,11 @@ public class UserController  implements UserControllerTemplate{
             String password = scan.nextLine();
             System.out.println("Podaj płeć: ");
             char gender = scan.nextLine().toUpperCase().charAt(0);
-            uc.registerUser(new User(name, lastname, login, password, gender));
+            if (gender == 'M' || gender == 'K') {
+                uc.registerUser(new User(name, lastname, login, password, gender));
+            }else{
+                System.out.println("Błędna płeć. Podaj M lub K");
+            }
           break;
         case 2:
           System.out.println("Podaj email: ");
@@ -120,6 +124,12 @@ public class UserController  implements UserControllerTemplate{
           System.out.println(uc.loginUser(logEmail, logPassword) ? "Zalogowany "+logEmail:"Błędne dane");
           break;
         case 3:
+          System.out.println("Podaj Id użytkownika: ");
+          int id = scan.nextInt();
+          scan.nextLine();
+          System.out.println("Podaj nowe hasło: ");
+          String newPassword = scan.nextLine();
+          uc.updatePasswordByUserId(id, newPassword);
           break;
         case 4:
           uc.printAllUsers();

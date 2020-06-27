@@ -2,6 +2,8 @@ package model;
 // Hints
 // CTRL + D - duplikowanie lini kodu
 // ALT + Ins - auto-generowanie fragmentów kodu
+// ALT _ Enter - auto-podpowiedź
+// CTRL + / - komentowanie/odkomentowanie
 
 import java.time.LocalDateTime;
 
@@ -9,7 +11,7 @@ import java.time.LocalDateTime;
 public class User extends Object{       // Każda klasa dziedziczy klasy nadrzędnej (zgodnie ze specyfikatorami dostępu)
     // pola klasowe -> pola o zasięgu widoczności w obrębie całej klasy
     int userId;                                   //domyślnie 0
-    String name;                                  //domyślnie null
+    public String name;                                  //domyślnie null
     String lastName;                              //domyślnie null
     String email;                                 //domyślnie null
     String password;                              //domyślnie null
@@ -20,16 +22,16 @@ public class User extends Object{       // Każda klasa dziedziczy klasy nadrzę
     // public - widoczna w całym programie
     // String - typ zwracanej wartości w return
     // toString() - nazwa metody (nie przyjmuje argumentów)
-    @Override   // Nadpisuje implementacjęmetody toString() z klasy Object
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", gender=" + gender +
-                ", registrationDateTime=" + registrationDateTime +
-                ", status=" + status +
-                '}';
-    }
+//    @Override   // Nadpisuje implementacjęmetody toString() z klasy Object
+//    public String toString() {
+//        return "User{" +
+//                "userId=" + userId +
+//                ", name='" + name + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", email='" + email + '\'' +
+//                ", gender=" + gender +
+//                ", registrationDateTime=" + registrationDateTime +
+//                ", status=" + status +
+//                '}';
+//    }
 }
